@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1",
+    "title": "Team Standup",
+    "date": "2025-11-16",
+    "time": "09:30",
+    "duration": 30
+  },
+  {
+    "id": "2",
+    "title": "Project Kickoff",
+    "date": "2025-11-16",
+    "time": "10:00",
+    "duration": 60
+  },
+  {
+    "id": "3",
+    "title": "Design Review",
+    "date": "2025-11-18",
+    "time": "14:00",
+    "duration": 45
+  },
+  {
+    "id": "4",
+    "title": "1:1 with Manager",
+    "date": "2025-11-18",
+    "time": "14:00",
+    "duration": 30
+  },
+  {
+    "id": "5",
+    "title": "Lunch with Sarah",
+    "date": "2025-11-22",
+    "time": "12:30",
+    "duration": 60
+  }
+]
