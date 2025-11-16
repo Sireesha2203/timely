@@ -1,53 +1,189 @@
-# Getting Started with Create React App
+# Timely - Smart Calendar & Productivity App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, feature-rich calendar and productivity application built with React. Timely helps you manage events, track time with Pomodoro technique, and view world times across different timezones.
 
-## Available Scripts
+![React](https://img.shields.io/badge/React-19.2.0-blue)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4.8-38bdf8)
+![dayjs](https://img.shields.io/badge/dayjs-1.11.9-orange)
 
-In the project directory, you can run:
+## ✨ Features
 
-### `npm start`
+### 📅 Calendar Management
+- **Multiple Views**: Month, Week, Work Week (Mon-Fri), and Year views
+- **Smart Navigation**: Seamlessly navigate between views (Year → Month → Week)
+- **Persistent State**: Remembers your last viewed date and calendar view
+- **Dark Mode**: Full dark mode support across the entire application
+- **Customizable Week Start**: Choose between Sunday or Monday as the first day of the week
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 📝 Event Management
+- **Create Events**: Add single or recurring events (daily, weekly, monthly)
+- **Edit & Delete**: Full CRUD operations for all events
+- **Conflict Detection**: Warns you about overlapping events
+- **Search**: Quickly find events with built-in search functionality
+- **Recurring Events**: Smart handling of recurring event series
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### ⏰ Pomodoro Timer
+- **Focus Time**: 25-minute work sessions
+- **Breaks**: Automatic 5-minute short breaks and 15-minute long breaks
+- **Persistent Timer**: Timer continues running even when navigating to other pages
+- **Live Sidebar**: See countdown in the sidebar from anywhere in the app
+- **Session Tracking**: Tracks completed Pomodoro sessions
+- **Audio Notifications**: Sound alerts when timer completes
 
-### `npm test`
+### 🌍 World Clock
+- **Multiple Timezones**: Track time across different cities worldwide
+- **Add Custom Timezones**: Support for all major timezones including:
+  - New York (EST)
+  - London (GMT)
+  - Tokyo (JST)
+  - Mumbai (IST)
+  - Sydney (AEDT)
+  - And many more...
+- **Real-time Updates**: All clocks update automatically
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### ⚙️ Settings & Customization
+- **Theme Toggle**: Switch between light and dark modes
+- **Time Format**: Choose 12-hour (AM/PM) or 24-hour format
+- **Date Format**: Select from MM/DD/YYYY, DD/MM/YYYY, or YYYY-MM-DD
+- **Week Start**: Configure week to start on Sunday or Monday
+- **Notifications**: Enable browser notifications for reminders
+- **Data Management**:
+  - Export all data (events, settings, world clocks) as JSON
+  - Import data from backup file
+  - Clear all data option
 
-### `npm run build`
+### 🎨 User Experience
+- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile
+- **Intuitive UI**: Clean, modern interface with Heroicons
+- **Collapsible Sidebar**: Space-efficient navigation
+- **Format Persistence**: All time/date format preferences apply throughout the app
+- **Input Adaptation**: Time input switches between 24-hour picker and 12-hour dropdowns based on settings
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🚀 Getting Started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Prerequisites
+- Node.js (v14 or higher)
+- npm or yarn
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Installation
 
-### `npm run eject`
+1. Clone the repository:
+```bash
+git clone https://github.com/sireesha2203/timely.git
+cd timely
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. Install dependencies:
+```bash
+npm install
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. Start the development server:
+```bash
+npm start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Build for Production
 
-## Learn More
+```bash
+npm run build
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Builds the app for production to the `build` folder. The build is optimized and minified.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🛠️ Tech Stack
 
-### Code Splitting
+- **React 19.2.0** - UI framework
+- **React Router DOM 6.14.1** - Navigation and routing
+- **dayjs 1.11.9** - Date/time manipulation
+- **Tailwind CSS 3.4.8** - Styling and responsive design
+- **Heroicons** - Beautiful icon library
+- **Context API** - Global state management
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 📁 Project Structure
+
+```
+src/
+├── calendar/          # Calendar views and components
+│   ├── CalendarPage.js
+│   ├── MonthView.js
+│   ├── WeekView.js
+│   ├── WorkWeekView.js
+│   └── YearView.js
+├── components/        # Reusable UI components
+│   ├── PageHeader.js
+│   ├── Sidebar.js
+│   └── Table.js
+├── context/          # React Context providers
+│   ├── EventContext.js
+│   └── PomodoroContext.js
+├── modals/           # Modal dialogs
+│   ├── AddEventModal.js
+│   └── EditEventModal.js
+├── pages/            # Main application pages
+│   ├── Dashboard.js
+│   ├── EventsPage.js
+│   ├── PomodoroPage.js
+│   ├── SettingsPage.js
+│   └── WorldClockPage.js
+├── utils/            # Utility functions
+│   ├── conflicts.js
+│   └── formatters.js
+├── App.js            # Main app component
+└── index.js          # Entry point
+```
+
+## 💾 Data Persistence
+
+Timely uses browser localStorage to persist:
+- Events and recurring event series
+- User settings (theme, formats, preferences)
+- World clocks configuration
+- Pomodoro timer state
+- Calendar view and selected date
+
+## 🎯 Key Features Explained
+
+### Time Format Customization
+When you select 12-hour format in Settings:
+- Events display times with AM/PM (e.g., "2:30 PM")
+- Time input changes to hour/minute/AM-PM dropdowns
+- All calendar views show formatted times
+
+### Smart Week Calculation
+When "Start week on Monday" is enabled:
+- Week view shows Monday through Sunday
+- Work week shows Monday through Friday
+- All navigation and date calculations adjust accordingly
+
+### Pomodoro Integration
+- Timer runs globally using Context API
+- Persists across page navigation
+- Shows live countdown in sidebar
+- Automatically advances through work/break cycles
+- Tracks session completion
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+## 🐛 Known Issues
+
+None currently reported. Please file an issue if you encounter any problems.
+
+## 📮 Contact
+
+For questions or feedback, please open an issue on GitHub.
+
+---
+
+Built with ❤️ using React and Tailwind CSS
 
 ### Analyzing the Bundle Size
 
