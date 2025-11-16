@@ -145,28 +145,28 @@ export default function SettingsPage(){
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Appearance Settings */}
-        <Card title="Appearance">
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="font-medium text-slate-900 dark:text-slate-100">Theme</div>
+        <Card title="🎨 Appearance">
+          <div className="space-y-4">
+            <div className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-800/50 dark:to-slate-700/50 transition-all duration-300 hover:shadow-md">
+              <div className="flex-1">
+                <div className="font-semibold text-slate-900 dark:text-slate-100 mb-1">Theme</div>
                 <div className="text-sm text-slate-500 dark:text-slate-400">Choose light or dark mode</div>
               </div>
               <button
                 onClick={toggleTheme}
-                className="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-lg transition-colors"
+                className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white rounded-lg text-sm font-medium transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105"
               >
                 {theme === 'dark' ? (
                   <>
-                    <SunIcon className="h-5 w-5 text-yellow-500" />
-                    <span className="text-sm text-slate-900 dark:text-slate-100">Light</span>
+                    <SunIcon className="h-5 w-5" />
+                    <span>Switch to Light</span>
                   </>
                 ) : (
                   <>
-                    <MoonIcon className="h-5 w-5 text-indigo-600" />
-                    <span className="text-sm text-slate-900 dark:text-slate-100">Dark</span>
+                    <MoonIcon className="h-5 w-5" />
+                    <span>Switch to Dark</span>
                   </>
                 )}
               </button>
@@ -174,114 +174,143 @@ export default function SettingsPage(){
           </div>
         </Card>
 
-        <Card title="Calendar Preferences">
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="font-medium text-slate-900 dark:text-slate-100">Start week on Monday</div>
+        <Card title="📅 Calendar Preferences">
+          <div className="space-y-4">
+            <div className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-800/50 dark:to-slate-700/50 transition-all duration-300 hover:shadow-md">
+              <div className="flex-1">
+                <div className="font-semibold text-slate-900 dark:text-slate-100 mb-1">Start week on Monday</div>
                 <div className="text-sm text-slate-500 dark:text-slate-400">Choose first day of week</div>
               </div>
-              <div>
-                <input type="checkbox" checked={startWeekMonday} onChange={e=> setStartWeekMonday(e.target.checked)} className="w-4 h-4" />
-              </div>
+              <button
+                onClick={() => setStartWeekMonday(!startWeekMonday)}
+                className={`relative inline-flex h-7 w-14 items-center rounded-full transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 ${
+                  startWeekMonday 
+                    ? 'bg-gradient-to-r from-indigo-600 to-purple-600' 
+                    : 'bg-slate-300 dark:bg-slate-600'
+                }`}
+              >
+                <span
+                  className={`inline-block h-5 w-5 transform rounded-full bg-white shadow-lg transition-transform duration-300 ${
+                    startWeekMonday ? 'translate-x-8' : 'translate-x-1'
+                  }`}
+                />
+              </button>
             </div>
 
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="font-medium text-slate-900 dark:text-slate-100">Time Format</div>
+            <div className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-800/50 dark:to-slate-700/50 transition-all duration-300 hover:shadow-md">
+              <div className="flex-1">
+                <div className="font-semibold text-slate-900 dark:text-slate-100 mb-1">Time Format</div>
                 <div className="text-sm text-slate-500 dark:text-slate-400">12-hour or 24-hour</div>
               </div>
-              <select value={timeFormat} onChange={e=> setTimeFormat(e.target.value)} className="px-2 py-1 border dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded">
-                <option value="12h">12-hour</option>
-                <option value="24h">24-hour</option>
+              <select 
+                value={timeFormat} 
+                onChange={e=> setTimeFormat(e.target.value)} 
+                className="px-4 py-2.5 border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg font-medium transition-all duration-300 hover:border-indigo-500 focus:border-indigo-600 focus:ring-4 focus:ring-indigo-500/20 outline-none cursor-pointer"
+              >
+                <option value="12h">12-hour ⏰</option>
+                <option value="24h">24-hour 🕐</option>
               </select>
             </div>
 
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="font-medium text-slate-900 dark:text-slate-100">Date Format</div>
+            <div className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-800/50 dark:to-slate-700/50 transition-all duration-300 hover:shadow-md">
+              <div className="flex-1">
+                <div className="font-semibold text-slate-900 dark:text-slate-100 mb-1">Date Format</div>
                 <div className="text-sm text-slate-500 dark:text-slate-400">Display format</div>
               </div>
-              <select value={dateFormat} onChange={e=> setDateFormat(e.target.value)} className="px-2 py-1 border dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded">
-                <option value="MM/DD/YYYY">MM/DD/YYYY</option>
-                <option value="DD/MM/YYYY">DD/MM/YYYY</option>
-                <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+              <select 
+                value={dateFormat} 
+                onChange={e=> setDateFormat(e.target.value)} 
+                className="px-4 py-2.5 border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg font-medium transition-all duration-300 hover:border-indigo-500 focus:border-indigo-600 focus:ring-4 focus:ring-indigo-500/20 outline-none cursor-pointer"
+              >
+                <option value="MM/DD/YYYY">MM/DD/YYYY 📆</option>
+                <option value="DD/MM/YYYY">DD/MM/YYYY 📆</option>
+                <option value="YYYY-MM-DD">YYYY-MM-DD 📆</option>
               </select>
             </div>
           </div>
         </Card>
 
         {/* Notifications */}
-        <Card title="Notifications">
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="font-medium text-slate-900 dark:text-slate-100">Browser Notifications</div>
+        <Card title="🔔 Notifications">
+          <div className="space-y-4">
+            <div className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-800/50 dark:to-slate-700/50 transition-all duration-300 hover:shadow-md">
+              <div className="flex-1">
+                <div className="font-semibold text-slate-900 dark:text-slate-100 mb-1">Browser Notifications</div>
                 <div className="text-sm text-slate-500 dark:text-slate-400">Get notified about events and timers</div>
               </div>
-              <div>
-                {notificationsEnabled ? (
-                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-full text-sm">
-                    <BellIcon className="h-4 w-4" />
-                    Enabled
-                  </span>
-                ) : (
-                  <button
-                    onClick={requestNotificationPermission}
-                    className="px-3 py-1 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm transition-colors"
-                  >
-                    Enable
-                  </button>
-                )}
-              </div>
+              <button
+                onClick={() => {
+                  if (notificationsEnabled) {
+                    setNotificationsEnabled(false)
+                    showSuccessMessage()
+                  } else {
+                    requestNotificationPermission()
+                  }
+                }}
+                className={`relative inline-flex h-7 w-14 items-center rounded-full transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 ${
+                  notificationsEnabled 
+                    ? 'bg-gradient-to-r from-green-500 to-emerald-500' 
+                    : 'bg-slate-300 dark:bg-slate-600'
+                }`}
+              >
+                <span
+                  className={`inline-block h-5 w-5 transform rounded-full bg-white shadow-lg transition-transform duration-300 ${
+                    notificationsEnabled ? 'translate-x-8' : 'translate-x-1'
+                  }`}
+                />
+              </button>
             </div>
           </div>
         </Card>
 
-        <Card title="Regional Settings">
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="font-medium text-slate-900 dark:text-slate-100">Timezone</div>
+        <Card title="🌍 Regional Settings">
+          <div className="space-y-4">
+            <div className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-800/50 dark:to-slate-700/50 transition-all duration-300 hover:shadow-md">
+              <div className="flex-1">
+                <div className="font-semibold text-slate-900 dark:text-slate-100 mb-1">Timezone</div>
                 <div className="text-sm text-slate-500 dark:text-slate-400">Select your timezone</div>
               </div>
-              <select value={timezone} onChange={e=> setTimezone(e.target.value)} className="px-2 py-1 border dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded">
-                <option value="UTC">UTC</option>
-                <option value="America/New_York">Eastern Time</option>
-                <option value="America/Chicago">Central Time</option>
-                <option value="America/Denver">Mountain Time</option>
-                <option value="America/Los_Angeles">Pacific Time</option>
-                <option value="Europe/London">London</option>
-                <option value="Asia/Kolkata">Mumbai (IST)</option>
-                <option value="Asia/Tokyo">Tokyo</option>
+              <select 
+                value={timezone} 
+                onChange={e=> setTimezone(e.target.value)} 
+                className="px-4 py-2.5 border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 rounded-lg font-medium transition-all duration-300 hover:border-indigo-500 focus:border-indigo-600 focus:ring-4 focus:ring-indigo-500/20 outline-none cursor-pointer min-w-[160px]"
+              >
+                <option value="UTC">🌐 UTC</option>
+                <option value="America/New_York">🇺🇸 Eastern Time</option>
+                <option value="America/Chicago">🇺🇸 Central Time</option>
+                <option value="America/Denver">🇺🇸 Mountain Time</option>
+                <option value="America/Los_Angeles">🇺🇸 Pacific Time</option>
+                <option value="Europe/London">🇬🇧 London</option>
+                <option value="Asia/Kolkata">🇮🇳 Mumbai (IST)</option>
+                <option value="Asia/Tokyo">🇯🇵 Tokyo</option>
               </select>
             </div>
           </div>
         </Card>
 
         {/* Data Management */}
-        <Card title="Data Management">
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="font-medium text-slate-900 dark:text-slate-100">Export Data</div>
+        <Card title="💾 Data Management">
+          <div className="space-y-4">
+            <div className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-800/50 dark:to-slate-700/50 transition-all duration-300 hover:shadow-md">
+              <div className="flex-1">
+                <div className="font-semibold text-slate-900 dark:text-slate-100 mb-1">Export Data</div>
                 <div className="text-sm text-slate-500 dark:text-slate-400">Download all your data</div>
               </div>
               <button
                 onClick={exportData}
-                className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm transition-colors"
+                className="px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white rounded-lg text-sm font-medium transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105"
               >
-                Export
+                📥 Export
               </button>
             </div>
 
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="font-medium text-slate-900 dark:text-slate-100">Import Data</div>
+            <div className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-800/50 dark:to-slate-700/50 transition-all duration-300 hover:shadow-md">
+              <div className="flex-1">
+                <div className="font-semibold text-slate-900 dark:text-slate-100 mb-1">Import Data</div>
                 <div className="text-sm text-slate-500 dark:text-slate-400">Restore from backup</div>
               </div>
-              <label className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm transition-colors cursor-pointer">
-                Import
+              <label className="px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white rounded-lg text-sm font-medium transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 cursor-pointer">
+                📤 Import
                 <input
                   type="file"
                   accept=".json"
@@ -291,15 +320,15 @@ export default function SettingsPage(){
               </label>
             </div>
 
-            <div className="pt-3 border-t border-slate-200 dark:border-slate-700">
+            <div className="p-4 rounded-xl bg-gradient-to-r from-red-50 to-rose-50 dark:from-red-900/20 dark:to-rose-900/20 border-2 border-red-200 dark:border-red-800/50 transition-all duration-300 hover:shadow-md">
               <div className="flex items-center justify-between">
-                <div>
-                  <div className="font-medium text-red-600 dark:text-red-400">Clear All Data</div>
-                  <div className="text-sm text-slate-500 dark:text-slate-400">Delete all events and settings</div>
+                <div className="flex-1">
+                  <div className="font-semibold text-red-700 dark:text-red-400 mb-1">Clear All Data</div>
+                  <div className="text-sm text-red-600/80 dark:text-red-400/80">Delete all events and settings</div>
                 </div>
                 <button
                   onClick={clearAllData}
-                  className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm transition-colors"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white rounded-lg text-sm font-medium transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105"
                 >
                   <TrashIcon className="h-4 w-4" />
                   Clear

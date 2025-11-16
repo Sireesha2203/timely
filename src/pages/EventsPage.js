@@ -26,15 +26,29 @@ export default function EventsPage(){
 
   function renderRow(ev){
     return (
-      <tr key={ev.id} className="border-t dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700">
-        <td className="px-4 py-3">{ev.title}</td>
-        <td className="px-4 py-3">{formatDate(ev.date)}</td>
-        <td className="px-4 py-3">{formatTime(ev.time)}</td>
-        <td className="px-4 py-3">{ev.duration}m</td>
-        <td className="px-4 py-3">
-          <div className="flex gap-2">
-            <button onClick={()=> setEditing(ev)} className="text-indigo-600 dark:text-indigo-400 text-sm">Edit</button>
-            <button onClick={()=> { if(window.confirm('Delete?')) deleteEvent(ev.id)}} className="text-red-600 dark:text-red-400 text-sm">Delete</button>
+      <tr key={ev.id} className="border-t dark:border-slate-700/50 hover:bg-gradient-to-r hover:from-indigo-50/50 hover:to-purple-50/50 dark:hover:from-indigo-900/20 dark:hover:to-purple-900/20 transition-all duration-300 group">
+        <td className="px-5 py-4 font-medium text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">{ev.title}</td>
+        <td className="px-5 py-4 text-slate-600 dark:text-slate-400">{formatDate(ev.date)}</td>
+        <td className="px-5 py-4 text-slate-600 dark:text-slate-400">{formatTime(ev.time)}</td>
+        <td className="px-5 py-4">
+          <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300">
+            {ev.duration}m
+          </span>
+        </td>
+        <td className="px-5 py-4">
+          <div className="flex gap-3">
+            <button 
+              onClick={()=> setEditing(ev)} 
+              className="text-indigo-600 dark:text-indigo-400 text-sm font-medium hover:text-indigo-700 dark:hover:text-indigo-300 transition-all duration-200 hover:scale-110"
+            >
+              ✏️ Edit
+            </button>
+            <button 
+              onClick={()=> { if(window.confirm('Delete this event?')) deleteEvent(ev.id)}} 
+              className="text-red-600 dark:text-red-400 text-sm font-medium hover:text-red-700 dark:hover:text-red-300 transition-all duration-200 hover:scale-110"
+            >
+              🗑️ Delete
+            </button>
           </div>
         </td>
       </tr>
@@ -43,7 +57,25 @@ export default function EventsPage(){
 
   return (
     <div>
-      <PageHeader title="Events" actions={<div className="flex items-center gap-2"><input placeholder="Search" className="px-2 py-1 border dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded" value={q} onChange={e=>setQ(e.target.value)} /><button onClick={()=> setAdding(true)} className="px-3 py-1 bg-indigo-600 text-white rounded">Add Event</button></div>} />
+      <PageHeader 
+        title="Events" 
+        actions={
+          <div className="flex items-center gap-3">
+            <input 
+              placeholder="🔍 Search events..." 
+              className="px-4 py-2 border-2 border-gray-200 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-xl focus:border-indigo-400 dark:focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 dark:focus:ring-indigo-900/30 transition-all duration-300 outline-none" 
+              value={q} 
+              onChange={e=>setQ(e.target.value)} 
+            />
+            <button 
+              onClick={()=> setAdding(true)} 
+              className="px-5 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white rounded-xl font-semibold shadow-lg shadow-indigo-200 dark:shadow-indigo-900/50 hover:scale-105 hover:shadow-xl transition-all duration-300"
+            >
+              ✨ Add Event
+            </button>
+          </div>
+        } 
+      />
 
       <Table columns={[{key:'title', title:'Title'}, {key:'date', title:'Date'}, {key:'time', title:'Start Time'}, {key:'duration', title:'Duration'}, {key:'actions', title:'Actions'}]} data={filtered} renderRow={renderRow} />
 
