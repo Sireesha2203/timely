@@ -9,7 +9,14 @@ A modern, feature-rich calendar and productivity application built with React. T
 ## ✨ Features
 
 ### 📅 Calendar Management
-- **Multiple Views**: Month, Week, Work Week (Mon-Fri), and Year views
+
+
+
+- **Multiple Views**: Month, Week, Work 
+
+https://github.com/user-attachments/assets/e8b03e1d-a84f-4c06-b341-d8838483cec3
+
+Week (Mon-Fri), and Year views
 - **Smart Navigation**: Seamlessly navigate between views (Year → Month → Week)
 - **Persistent State**: Remembers your last viewed date and calendar view
 - **Dark Mode**: Full dark mode support across the entire application
