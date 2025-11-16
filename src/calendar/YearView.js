@@ -5,8 +5,21 @@ import { useEvents } from '../context/EventContext'
 
 export default function YearView({ viewSelector, initialDate, onMonthClick, onDateChange }){
   const today = dayjs();
+  const startWeekMonday = localStorage.getItem('timely.startWeekMonday') === 'true';
   const [year, setYear] = useState(initialDate ? initialDate.year() : today.year());
   const { events } = useEvents();
+
+  useEffect(() => {
+    if (initialDate) {
+      setYear(initialDate.year());
+    }
+  }, [initialDate]);
+
+  const dayHeaders = useMemo(() => {
+    return startWeekMonday 
+      ? ['M','T','W','T','F','S','S']
+      : ['S','M','T','W','T','F','S'];
+  }, [startWeekMonday]);
 
   useEffect(() => {
     if (initialDate) {
@@ -71,7 +84,13 @@ export default function YearView({ viewSelector, initialDate, onMonthClick, onDa
           const key = month.format('YYYY-MM');
           const eventCount = eventsByMonth[key] || 0;
           const daysInMonth = month.daysInMonth();
-          const firstDay = month.day();
+          
+          // Calculate first day offset based on week start setting
+          let firstDay = month.day(); // 0=Sunday, 1=Monday, etc.
+          if (startWeekMonday) {
+            // Adjust so Monday is 0, Sunday is 6
+            firstDay = firstDay === 0 ? 6 : firstDay - 1;
+          }
           
           const days = [];
           for(let i=0; i<firstDay; i++) days.push(null);
@@ -88,7 +107,7 @@ export default function YearView({ viewSelector, initialDate, onMonthClick, onDa
                 {eventCount > 0 && <div className="text-xs text-indigo-600 dark:text-indigo-400">{eventCount} events</div>}
               </div>
               <div className="grid grid-cols-7 gap-1 text-xs">
-                {['S','M','T','W','T','F','S'].map((d,i)=> <div key={i} className="text-center text-slate-500 dark:text-slate-400">{d}</div>)}
+                {dayHeaders.map((d,i)=> <div key={i} className="text-center text-slate-500 dark:text-slate-400">{d}</div>)}
                 {days.map((d,i)=> (
                   <div key={i} className={`text-center p-1 ${d? 'text-slate-700 dark:text-slate-300':'text-transparent'} ${d && dayjs().year(year).month(month.month()).date(d).isSame(today,'day')? 'bg-indigo-100 dark:bg-indigo-900 rounded':''}`}>
                     {d || '-'}

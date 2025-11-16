@@ -6,9 +6,25 @@ import { hasConflict } from '../utils/conflicts'
 import EditEventModal from '../modals/EditEventModal'
 import AddEventModal from '../modals/AddEventModal'
 
-function monthMatrix(current) {
+function monthMatrix(current, startWeekMonday = false) {
   const startOfMonth = current.startOf('month');
-  const startDay = startOfMonth.startOf('week');
+  let startDay;
+  
+  if (startWeekMonday) {
+    // If Monday is the start, calculate accordingly
+    const dayOfWeek = startOfMonth.day(); // 0=Sunday, 1=Monday, etc.
+    if (dayOfWeek === 0) {
+      // If first day of month is Sunday, go back 6 days to get Monday
+      startDay = startOfMonth.subtract(6, 'day');
+    } else {
+      // Go back to Monday (dayOfWeek - 1 days)
+      startDay = startOfMonth.subtract(dayOfWeek - 1, 'day');
+    }
+  } else {
+    // Default: Sunday is the start
+    startDay = startOfMonth.startOf('week');
+  }
+  
   const matrix = [];
   let cur = startDay;
   for (let week = 0; week < 6; week++) {
@@ -24,6 +40,7 @@ function monthMatrix(current) {
 
 export default function MonthView({ viewSelector, initialDate, onDateClick, onDateChange }){
   const today = dayjs();
+  const startWeekMonday = localStorage.getItem('timely.startWeekMonday') === 'true';
   const [current, setCurrent] = useState(initialDate ? initialDate.startOf('month') : today.startOf('month'));
   const { events } = useEvents();
 
@@ -33,7 +50,13 @@ export default function MonthView({ viewSelector, initialDate, onDateClick, onDa
     }
   }, [initialDate]);
 
-  const matrix = useMemo(()=> monthMatrix(current), [current]);
+  const matrix = useMemo(()=> monthMatrix(current, startWeekMonday), [current, startWeekMonday]);
+
+  const dayHeaders = useMemo(() => {
+    return startWeekMonday 
+      ? ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
+      : ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  }, [startWeekMonday]);
 
   const eventsByDay = useMemo(()=>{
     const map = {};
@@ -101,7 +124,7 @@ export default function MonthView({ viewSelector, initialDate, onDateClick, onDa
       </div>
 
       <div className="grid grid-cols-7 gap-2">
-        {['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(d=> (
+        {dayHeaders.map(d=> (
           <div key={d} className="text-sm font-medium text-center text-slate-600 dark:text-slate-400">{d}</div>
         ))}
       </div>
